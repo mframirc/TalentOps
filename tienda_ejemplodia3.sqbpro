@@ -106,6 +106,14 @@ FROM detalle_pedidos
 GROUP BY pedido_id
 HAVING SUM(cantidad * precio_unitario) &gt; 150;
 
+-- Ventas por ciudad usando JOIN + GROUP BY
+SELECT c.ciudad, COUNT(p.id) as num_pedidos, SUM(dp.cantidad * dp.precio_unitario) as ingresos_ciudad
+FROM clientes1 c
+LEFT JOIN pedidos1 p ON c.id = p.cliente_id
+LEFT JOIN detalle_pedidos dp ON p.id = dp.pedido_id
+GROUP BY c.ciudad
+HAVING SUM(dp.cantidad * dp.precio_unitario) &gt; 0;
+
 
 
 </sql><current_tab id="1"/></tab_sql></sqlb_project>
