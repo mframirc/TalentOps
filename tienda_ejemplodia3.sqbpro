@@ -18,52 +18,96 @@ SELECT nombre, precio FROM productos WHERE precio &gt; 10;
 -- Productos con stock entre 10 y 40, ordenados por stock ascendente
 SELECT nombre, stock, precio FROM productos
 WHERE stock BETWEEN 10 AND 40
-ORDER BY stock ASC;
+ORDER BY stock ASC;
+
 
 -- Nombres que contienen 'a' ordenados alfabéticamente
 SELECT nombre, precio FROM productos
 WHERE nombre LIKE '%a%'
-ORDER BY nombre ASC;
-
-
-
--- Tabla de pedidos
-CREATE TABLE pedidos1 (
-    id INTEGER PRIMARY KEY,
-    cliente_id INTEGER,
-    fecha_pedido DATE NOT NULL,
-    total REAL,
-    FOREIGN KEY (cliente_id) REFERENCES clientes1(id)
-);
-
--- Insertar datos de ejemplo
-INSERT INTO clientes1 VALUES
-(1, 'Ana García', 'ana@email.com', 'Madrid'),
-(2, 'Carlos López', 'carlos@email.com', 'Barcelona'),
-(3, 'María Rodríguez', 'maria@email.com', 'Madrid');
-
-INSERT INTO pedidos1 VALUES
-(1, 1, '2024-01-15', 150.50),
-(2, 1, '2024-01-20', 89.99),
-(3, 2, '2024-01-18', 299.99);
-
--- INNER JOIN: Solo clientes con pedidos
-SELECT c.nombre, p.fecha_pedido, p.total
-FROM clientes1 c
-INNER JOIN pedidos1 p ON c.id = p.cliente_id;
-
--- LEFT JOIN: Todos los clientes, con pedidos si existen
-SELECT c.nombre, COUNT(p.id) as num_pedidos, SUM(p.total) as total_compras
-FROM clientes1 c
-LEFT JOIN pedidos1 p ON c.id = p.cliente_id
-GROUP BY c.id, c.nombre;
-
--- Clientes de Madrid con sus pedidos
-SELECT c.nombre, c.ciudad, p.fecha_pedido, p.total
-FROM clientes1 c
-LEFT JOIN pedidos1 p ON c.id = p.cliente_id
-WHERE c.ciudad = 'Madrid';
-
-
-
+ORDER BY nombre ASC;
+
+
+
+
+
+
+
+-- Tabla de pedidos
+
+CREATE TABLE pedidos1 (
+
+    id INTEGER PRIMARY KEY,
+
+    cliente_id INTEGER,
+
+    fecha_pedido DATE NOT NULL,
+
+    total REAL,
+
+    FOREIGN KEY (cliente_id) REFERENCES clientes1(id)
+
+);
+
+
+
+-- Insertar datos de ejemplo
+
+INSERT INTO clientes1 VALUES
+
+(1, 'Ana García', 'ana@email.com', 'Madrid'),
+
+(2, 'Carlos López', 'carlos@email.com', 'Barcelona'),
+
+(3, 'María Rodríguez', 'maria@email.com', 'Madrid');
+
+
+
+INSERT INTO pedidos1 VALUES
+
+(1, 1, '2024-01-15', 150.50),
+
+(2, 1, '2024-01-20', 89.99),
+
+(3, 2, '2024-01-18', 299.99);
+
+
+
+-- INNER JOIN: Solo clientes con pedidos
+
+SELECT c.nombre, p.fecha_pedido, p.total
+
+FROM clientes1 c
+
+INNER JOIN pedidos1 p ON c.id = p.cliente_id;
+
+
+
+-- LEFT JOIN: Todos los clientes, con pedidos si existen
+
+SELECT c.nombre, COUNT(p.id) as num_pedidos, SUM(p.total) as total_compras
+
+FROM clientes1 c
+
+LEFT JOIN pedidos1 p ON c.id = p.cliente_id
+
+GROUP BY c.id, c.nombre;
+
+
+
+-- Clientes de Madrid con sus pedidos
+
+SELECT c.nombre, c.ciudad, p.fecha_pedido, p.total
+
+FROM clientes1 c
+
+LEFT JOIN pedidos1 p ON c.id = p.cliente_id
+
+WHERE c.ciudad = 'Madrid';
+
+
+
+
+
+
+
 </sql><current_tab id="1"/></tab_sql></sqlb_project>
