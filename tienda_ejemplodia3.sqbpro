@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="tienda_ejemplo1.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser query pragmas" current="2"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1621"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="detalle_pedidos" custom_title="0" dock_id="4" table="4,15:maindetalle_pedidos"/><dock_state state="000000ff00000000fd00000001000000020000041b000002b6fc0100000003fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000000000000000fb000000160064006f0063006b00420072006f00770073006500320100000000000002870000000000000000fb000000160064006f0063006b00420072006f007700730065003401000000000000041b0000011800ffffff0000041b0000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="clientes" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="51"/><column index="3" value="39"/><column index="4" value="89"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="clientes1" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="124"/><column index="3" value="132"/><column index="4" value="78"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="detalle_pedidos" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="65"/><column index="3" value="77"/><column index="4" value="56"/><column index="5" value="93"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="pedidos1" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="65"/><column index="3" value="85"/><column index="4" value="54"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="Comprobar clave &amp;foránea">PRAGMA foreign_key_check;</sql><sql name="Comprobar &amp;integridad">CREATE TABLE productos (
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="tienda_ejemplo1.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser query pragmas" current="2"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1621"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="6" parent="0"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="productos" custom_title="0" dock_id="4" table="4,9:mainproductos"/><dock_state state="000000ff00000000fd00000001000000020000041b000002b6fc0100000003fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000000000000000fb000000160064006f0063006b00420072006f00770073006500320100000000000002870000000000000000fb000000160064006f0063006b00420072006f007700730065003401000000000000041b0000011800ffffff0000041b0000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="categorias" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="93"/><column index="3" value="280"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="clientes" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="51"/><column index="3" value="39"/><column index="4" value="89"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="clientes1" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="124"/><column index="3" value="132"/><column index="4" value="78"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="detalle_pedidos" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="65"/><column index="3" value="77"/><column index="4" value="56"/><column index="5" value="93"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="pedidos1" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="65"/><column index="3" value="85"/><column index="4" value="54"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="productos" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="132"/><column index="3" value="54"/><column index="4" value="93"/><column index="5" value="38"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="Comprobar clave &amp;foránea">PRAGMA foreign_key_check;</sql><sql name="Comprobar &amp;integridad*">CREATE TABLE productos (
     id INTEGER PRIMARY KEY,
     nombre TEXT NOT NULL,
     precio REAL NOT NULL,
@@ -114,6 +114,67 @@ LEFT JOIN detalle_pedidos dp ON p.id = dp.pedido_id
 GROUP BY c.ciudad
 HAVING SUM(dp.cantidad * dp.precio_unitario) &gt; 0;
 
+-- Tabla de categorías
+CREATE TABLE categorias (
+    id INTEGER PRIMARY KEY,
+    nombre TEXT NOT NULL,
+    descripcion TEXT
+);
+
+-- Agregar categoría a productos
+ALTER TABLE productos ADD COLUMN categoria_id INTEGER REFERENCES categorias(id);
+
+INSERT INTO categorias VALUES
+(1, 'Electrónica', 'Productos electrónicos y tecnología'),
+(2, 'Accesorios', 'Accesorios para computadoras'),
+(3, 'Audio', 'Productos de audio y sonido');
+
+UPDATE productos SET categoria_id = 1 WHERE nombre LIKE '%Laptop%' OR nombre LIKE '%Monitor%';
+UPDATE productos SET categoria_id = 2 WHERE nombre LIKE '%Mouse%' OR nombre LIKE '%Teclado%';
+UPDATE productos SET categoria_id = 3 WHERE nombre LIKE '%Audífonos%';
+
+-- Clientes que han comprado productos de Electrónica
+SELECT DISTINCT c.nombre, c.email
+FROM clientes1 c
+WHERE c.id IN (
+    SELECT DISTINCT p.cliente_id
+    FROM pedidos1 p
+    JOIN detalle_pedidos dp ON p.id = dp.pedido_id
+    JOIN productos prod ON dp.producto_id = prod.id
+    JOIN categorias cat ON prod.categoria_id = cat.id
+    WHERE cat.nombre = 'Electrónica'
+);
+
+-- Productos con precio por encima del promedio de su categoría
+SELECT p.nombre, p.precio, cat.nombre as categoria
+FROM productos p
+JOIN categorias cat ON p.categoria_id = cat.id
+WHERE p.precio &gt; (
+    SELECT AVG(p2.precio)
+    FROM productos p2
+    WHERE p2.categoria_id = p.categoria_id
+);
+
+-- Para cada cliente, mostrar su pedido más reciente
+SELECT c.nombre, p.fecha_pedido, p.total
+FROM clientes1 c
+JOIN pedidos1 p ON c.id = p.cliente_id
+WHERE p.fecha_pedido = (
+    SELECT MAX(p2.fecha_pedido)
+    FROM pedidos1 p2
+    WHERE p2.cliente_id = c.id
+);
+
+-- Clientes que tienen pedidos con productos caros (&gt;200)
+SELECT c.nombre, c.ciudad
+FROM clientes1 c
+WHERE EXISTS (
+    SELECT 1
+    FROM pedidos1 p
+    JOIN detalle_pedidos dp ON p.id = dp.pedido_id
+    WHERE p.cliente_id = c.id
+    AND dp.precio_unitario &gt; 200
+);
 
 
 </sql><current_tab id="1"/></tab_sql></sqlb_project>
