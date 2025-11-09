@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="tienda_ejemplo1.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser query pragmas" current="2"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1266"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="pedidos1" custom_title="0" dock_id="4" table="4,8:mainpedidos1"/><dock_state state="000000ff00000000fd00000001000000020000041b000002b6fc0100000003fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000000000000000fb000000160064006f0063006b00420072006f00770073006500320100000000000002870000000000000000fb000000160064006f0063006b00420072006f007700730065003401000000000000041b0000011800ffffff0000041b0000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="clientes" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="51"/><column index="3" value="39"/><column index="4" value="89"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="clientes1" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="124"/><column index="3" value="132"/><column index="4" value="78"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="pedidos1" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="65"/><column index="3" value="85"/><column index="4" value="54"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="Comprobar clave &amp;foránea">PRAGMA foreign_key_check;</sql><sql name="Comprobar &amp;integridad*">CREATE TABLE productos (
+    id INTEGER PRIMARY KEY,
+    nombre TEXT NOT NULL,
+    precio REAL NOT NULL,
+    categoria TEXT,
+    stock INTEGER DEFAULT 0
+);
+INSERT INTO productos VALUES
+(1, 'Laptop Dell', 1200.00, 'Electrónica', 15),
+(2, 'Mouse Logitech', 25.50, 'Accesorios', 50),
+(3, 'Teclado Mecánico', 89.99, 'Accesorios', 30),
+(4, 'Monitor 24&quot;', 199.99, 'Electrónica', 12),
+(5, 'Audífonos Sony', 149.50, 'Audio', 25);
+
+--- Seleccionar productos con precio &gt; 100
+SELECT nombre, precio FROM productos WHERE precio &gt; 10;
+
+-- Productos con stock entre 10 y 40, ordenados por stock ascendente
+SELECT nombre, stock, precio FROM productos
+WHERE stock BETWEEN 10 AND 40
+ORDER BY stock ASC;
+
+-- Nombres que contienen 'a' ordenados alfabéticamente
+SELECT nombre, precio FROM productos
+WHERE nombre LIKE '%a%'
+ORDER BY nombre ASC;
+
+
+
+-- Tabla de pedidos
+CREATE TABLE pedidos1 (
+    id INTEGER PRIMARY KEY,
+    cliente_id INTEGER,
+    fecha_pedido DATE NOT NULL,
+    total REAL,
+    FOREIGN KEY (cliente_id) REFERENCES clientes1(id)
+);
+
+-- Insertar datos de ejemplo
+INSERT INTO clientes1 VALUES
+(1, 'Ana García', 'ana@email.com', 'Madrid'),
+(2, 'Carlos López', 'carlos@email.com', 'Barcelona'),
+(3, 'María Rodríguez', 'maria@email.com', 'Madrid');
+
+INSERT INTO pedidos1 VALUES
+(1, 1, '2024-01-15', 150.50),
+(2, 1, '2024-01-20', 89.99),
+(3, 2, '2024-01-18', 299.99);
+
+-- INNER JOIN: Solo clientes con pedidos
+SELECT c.nombre, p.fecha_pedido, p.total
+FROM clientes1 c
+INNER JOIN pedidos1 p ON c.id = p.cliente_id;
+
+-- LEFT JOIN: Todos los clientes, con pedidos si existen
+SELECT c.nombre, COUNT(p.id) as num_pedidos, SUM(p.total) as total_compras
+FROM clientes1 c
+LEFT JOIN pedidos1 p ON c.id = p.cliente_id
+GROUP BY c.id, c.nombre;
+
+-- Clientes de Madrid con sus pedidos
+SELECT c.nombre, c.ciudad, p.fecha_pedido, p.total
+FROM clientes1 c
+LEFT JOIN pedidos1 p ON c.id = p.cliente_id
+WHERE c.ciudad = 'Madrid';
+
+
+
+</sql><current_tab id="1"/></tab_sql></sqlb_project>
