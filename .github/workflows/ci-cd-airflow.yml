@@ -35,7 +35,15 @@ jobs:
       run: |
         pip install "apache-airflow==${{ env.AIRFLOW_VERSION }}" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${{ env.AIRFLOW_VERSION }}/constraints-${{ env.PYTHON_VERSION }}.txt"
         pip install -r requirements.txt
-        pip install pytest pytest-cov
+        pip install pytest pytest-cov flake8 black isort
+    - name: Lint (flake8)
+      run: flake8 .
+
+    - name: Format check (black)
+      run: black --check .
+
+    - name: Import sorting check (isort)
+      run: isort . --check-only
     
     - name: Validate DAG syntax
       run: |
