@@ -49,12 +49,19 @@ jobs:
       run: |
         python - << 'EOF'
         from airflow.models import DagBag
+
+        print("🔍 Cargando DAGs...")
         dagbag = DagBag(include_examples=False)
+
         if dagbag.import_errors:
-            print(" DAG ERRORS:", dagbag.import_errors)
+            print("❌ Errores encontrados en los DAGs:")
+            for dag_id, error in dagbag.import_errors.items():
+                print(f" - {dag_id}: {error}")
             exit(1)
+
         print(f" {len(dagbag.dags)} DAGs cargados correctamente")
         EOF
+
     
     - name: Run DAG tests
       run: |
