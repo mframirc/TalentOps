@@ -26,6 +26,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install "apache-airflow==${{ env.AIRFLOW_VERSION }}" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${{ env.AIRFLOW_VERSION }}/constraints-${{ env.PYTHON_VERSION }}.txt"
+        pip install -r requirements.txt
         pip install pytest pytest-cov
     
     - name: Validate DAG syntax
