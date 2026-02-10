@@ -63,7 +63,7 @@ jobs:
         EOF
 
     
-    - name: Run DAG tests
+    - name: Run tests
       run: |
         pytest tests/ -v \
           --cov=src \
