@@ -65,7 +65,11 @@ jobs:
     
     - name: Run DAG tests
       run: |
-        pytest tests/dags/ -v --cov=dags --cov-report=xml
+        pytest tests/ -v \
+          --cov=src \
+          --cov=dags \
+          --cov-report=xml \
+          --cov-report=term
     
     - name: Upload coverage
       uses: codecov/codecov-action@v3
