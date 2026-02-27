@@ -1,13 +1,35 @@
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime
+import logging
 
-from src.validacion.ventas_validator import validar_datos_ventas
-# from src.procesamiento import procesar_datos_rapido
+from src.validacion.ventas.validador import validar_datos_ventas
+from src.incident_response.runbook import IncidentRunbook
+
+
+logger = logging.getLogger(__name__)
+
+
+# -----------------------------
+# CALLBACK DE FALLO (RUNBOOK)
+# -----------------------------
+def on_failure_callback(context):
+    dag_id = context["dag"].dag_id
+    task_id = context["task_instance"].task_id
+    error = context["exception"]
+
+    runbook = IncidentRunbook()
+
+    incident_context = {
+        "triggered_by": "airflow_failure",
+        "dag_id": dag_id,
+        "task_id": task_id,
+        "error": str(error)
+    }
+
+    response = runbook.handle_incident("pipeline_down", incident_context)
+
+    logger.error(f"Runbook ejecutado por fallo en {dag_id}.{task_id}: {response}")
 
 
 # -----------------------------
@@ -23,10 +45,9 @@ def tarea_procesamiento():
 # TAREA DE VALIDACIÓN
 # -----------------------------
 def tarea_validar_datos(**context):
-    # En un pipeline real, estos datos vendrían de XCom
     datos_ventas = [
         {'precio': 100, 'fecha': '2024-01-01'},
-        {'precio': -50, 'fecha': '2024-01-02'}
+        {'precio': -50, 'fecha': '2024-01-02'}  # Esto generará error
     ]
 
     resultado = validar_datos_ventas(datos_ventas)
@@ -46,6 +67,8 @@ with DAG(
     start_date=datetime(2024, 1, 1),
     schedule="@daily",
     catchup=False,
+    on_failure_callback=on_failure_callback,
+    tags=["processing"]
 ) as dag:
 
     validar = PythonOperator(
@@ -59,7 +82,6 @@ with DAG(
         python_callable=tarea_procesamiento,
     )
 
-    # ORDEN DEL PIPELINE
     validar >> procesar
 
 

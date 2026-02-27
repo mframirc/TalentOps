@@ -1,0 +1,25 @@
+[2026-02-27T23:15:48.837+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-02-27T23:15:48.872+0000] {taskinstance.py:2073} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_simple.paso_2 scheduled__2026-02-26T00:00:00+00:00 [queued]>
+[2026-02-27T23:15:48.885+0000] {taskinstance.py:2073} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_simple.paso_2 scheduled__2026-02-26T00:00:00+00:00 [queued]>
+[2026-02-27T23:15:48.886+0000] {taskinstance.py:2303} INFO - Starting attempt 1 of 2
+[2026-02-27T23:15:48.906+0000] {taskinstance.py:2327} INFO - Executing <Task(PythonOperator): paso_2> on 2026-02-26 00:00:00+00:00
+[2026-02-27T23:15:48.915+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61: DeprecationWarning: This process (pid=61) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2026-02-27T23:15:48.917+0000] {standard_task_runner.py:63} INFO - Started process 63 to run task
+[2026-02-27T23:15:48.918+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'pipeline_simple', 'paso_2', 'scheduled__2026-02-26T00:00:00+00:00', '--job-id', '13', '--raw', '--subdir', 'DAGS_FOLDER/pipeline_simple_dag.py', '--cfg-path', '/tmp/tmpyh8h157b']
+[2026-02-27T23:15:48.923+0000] {standard_task_runner.py:91} INFO - Job 13: Subtask paso_2
+[2026-02-27T23:15:48.950+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.12/site-packages/***/settings.py:195: DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+  SQL_ALCHEMY_CONN = conf.get("database", "SQL_ALCHEMY_CONN")
+
+[2026-02-27T23:15:49.018+0000] {task_command.py:426} INFO - Running <TaskInstance: pipeline_simple.paso_2 scheduled__2026-02-26T00:00:00+00:00 [running]> on host 8406c535e4ce
+[2026-02-27T23:15:49.220+0000] {taskinstance.py:2644} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='mauricio' AIRFLOW_CTX_DAG_ID='pipeline_simple' AIRFLOW_CTX_TASK_ID='paso_2' AIRFLOW_CTX_EXECUTION_DATE='2026-02-26T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-02-26T00:00:00+00:00'
+[2026-02-27T23:15:49.222+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-02-27T23:15:49.248+0000] {logging_mixin.py:188} INFO - Ejecutando paso_2: Validar y limpiar datos
+[2026-02-27T23:15:49.270+0000] {logging_mixin.py:188} INFO - Datos validados correctamente
+[2026-02-27T23:15:49.272+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-02-27T23:15:49.274+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-02-27T23:15:49.295+0000] {taskinstance.py:1205} INFO - Marking task as SUCCESS. dag_id=pipeline_simple, task_id=paso_2, execution_date=20260226T000000, start_date=20260227T231548, end_date=20260227T231549
+[2026-02-27T23:15:49.336+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-02-27T23:15:49.371+0000] {taskinstance.py:3482} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-02-27T23:15:49.375+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

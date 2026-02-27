@@ -1,0 +1,31 @@
+groups:
+- name: pipeline_alerts
+  rules:
+
+  - alert: PipelineHighErrorRate
+    expr: rate(airflow_pipeline_dag_failure_total[5m]) /
+          (rate(airflow_pipeline_dag_success_total[5m]) +
+           rate(airflow_pipeline_dag_failure_total[5m])) > 0.1
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High error rate in pipeline"
+      description: "Pipeline error rate > 10% for 5 minutes"
+
+  - alert: PipelineSLAViolation
+    expr: increase(airflow_pipeline_sla_violations_total[1h]) > 0
+    labels:
+      severity: critical
+    annotations:
+      summary: "SLA violation detected"
+      description: "Pipeline failed to meet SLA requirements"
+
+  - alert: PipelineDataFreshness
+    expr: airflow_pipeline_data_freshness_hours > 24
+    labels:
+      severity: warning
+    annotations:
+      summary: "Data freshness issue"
+      description: "Pipeline data is more than 24 hours old"
+

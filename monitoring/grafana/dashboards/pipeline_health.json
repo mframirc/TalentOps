@@ -1,0 +1,31 @@
+{
+  "title": "Pipeline Health Dashboard",
+  "panels": [
+    {
+      "title": "DAG Success Rate",
+      "type": "stat",
+      "targets": [{
+        "expr": "rate(airflow_pipeline_dag_success_total[1h]) / (rate(airflow_pipeline_dag_success_total[1h]) + rate(airflow_pipeline_dag_failure_total[1h])) * 100",
+        "legendFormat": "Success Rate %"
+      }]
+    },
+    {
+      "title": "Average Processing Time",
+      "type": "graph",
+      "targets": [{
+        "expr": "rate(airflow_pipeline_extract_duration_seconds_sum[5m]) / rate(airflow_pipeline_extract_duration_seconds_count[5m])",
+        "legendFormat": "Extract Time (s)"
+      }]
+    },
+    {
+      "title": "Error Rate by Component",
+      "type": "bargauge",
+      "targets": [
+        {"expr": "rate(airflow_pipeline_extract_errors_total[1h])", "legendFormat": "Extract"},
+        {"expr": "rate(airflow_pipeline_transform_errors_total[1h])", "legendFormat": "Transform"},
+        {"expr": "rate(airflow_pipeline_load_errors_total[1h])", "legendFormat": "Load"}
+      ]
+    }
+  ]
+}
+
