@@ -1,0 +1,14 @@
+# Airflow logs
+logs/
+*/logs/
+
+# Grafana database
+monitoring/grafana/grafana.db
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Docker artifacts
+*.pid
+*.db
