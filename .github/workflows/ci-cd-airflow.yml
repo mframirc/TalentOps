@@ -22,26 +22,54 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Cache pip
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
     
     - name: Install dependencies
       run: |
-        pip install apache-airflow==${{ env.AIRFLOW_VERSION }}
-        pip install pytest pytest-cov
+        pip install "apache-airflow==${{ env.AIRFLOW_VERSION }}" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-${{ env.AIRFLOW_VERSION }}/constraints-${{ env.PYTHON_VERSION }}.txt"
+        pip install -r requirements.txt
+        pip install pytest pytest-cov flake8 black isort
+    - name: Lint (flake8)
+      run: flake8 .
+
+    - name: Format check (black)
+      run: black --check .
+
+    - name: Import sorting check (isort)
+      run: isort . --check-only
     
     - name: Validate DAG syntax
       run: |
         python - << 'EOF'
         from airflow.models import DagBag
+
+        print(" Cargando DAGs...")
         dagbag = DagBag(include_examples=False)
+
         if dagbag.import_errors:
-            print("❌ DAG ERRORS:", dagbag.import_errors)
+            print(" Errores encontrados en los DAGs:")
+            for dag_id, error in dagbag.import_errors.items():
+                print(f" - {dag_id}: {error}")
             exit(1)
-        print(f"✅ {len(dagbag.dags)} DAGs cargados correctamente")
+
+        print(f" {len(dagbag.dags)} DAGs cargados correctamente")
         EOF
+
     
-    - name: Run DAG tests
+    - name: Run tests
       run: |
-        pytest tests/dags/ -v --cov=dags --cov-report=xml
+        pytest tests/ -v \
+          --cov=src \
+          --cov=dags \
+          --cov-report=xml \
+          --cov-report=term
     
     - name: Upload coverage
       uses: codecov/codecov-action@v3
@@ -56,7 +84,7 @@ jobs:
     steps:
     - name: Deploy to Dev
       run: |
-        echo "🚀 Deploying to development environment"
+        echo " Deploying to development environment"
         # Aquí iría lógica real de deployment (docker-compose, kubectl, etc.)
 
   deploy-prod:
@@ -68,5 +96,81 @@ jobs:
     steps:
     - name: Deploy to Production
       run: |
-        echo "🎯 Deploying to production environment"
+        echo " Deploying to production environment"
         # Aquí iría lógica real de deployment
+# ============================
+# RESPALDO ORIGINAL DEL WORKFLOW
+# ============================
+#name: Airflow CI/CD Pipeline
+#
+#on:
+#  push:
+#     branches: [ main, develop ]
+#   pull_request:
+#     branches: [ main ]
+# 
+# env:
+#   AIRFLOW_VERSION: 2.7.0
+#   PYTHON_VERSION: '3.10'
+# 
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     
+#     steps:
+#    - name: Checkout repository
+#       uses: actions/checkout@v3
+#     
+#     - name: Set up Python
+#       uses: actions/setup-python@v4
+#       with:
+#         python-version: ${{ env.PYTHON_VERSION }}
+#     
+#     - name: Install dependencies
+#       run: |
+#         pip install apache-airflow==${{ env.AIRFLOW_VERSION }}
+#         pip install pytest pytest-cov
+#     
+#     - name: Validate DAG syntax
+#       run: |
+#         python - << 'EOF'
+#         from airflow.models import DagBag
+#         dagbag = DagBag(include_examples=False)
+#         if dagbag.import_errors:
+#             print(" DAG ERRORS:", dagbag.import_errors)
+#             exit(1)
+#         print(f" {len(dagbag.dags)} DAGs cargados correctamente")
+#         EOF
+#     
+#     - name: Run DAG tests
+#       run: |
+#         pytest tests/dags/ -v --cov=dags --cov-report=xml
+#     
+#     - name: Upload coverage
+#       uses: codecov/codecov-action@v3
+#       with:
+#         file: ./coverage.xml
+# 
+#   deploy-dev:
+#     needs: test
+#     runs-on: ubuntu-latest
+#     if: github.ref == 'refs/heads/develop'
+#     
+#     steps:
+#     - name: Deploy to Dev
+#       run: |
+#         echo " Deploying to development environment"
+#         # Aquí iría lógica real de deployment (docker-compose, kubectl, etc.)
+# 
+#   deploy-prod:
+#     needs: test
+#     runs-on: ubuntu-latest
+#     if: github.ref == 'refs/heads/main'
+#     environment: production
+#     
+#     steps:
+#     - name: Deploy to Production
+#       run: |
+#         echo " Deploying to production environment"
+#         # Aquí iría lógica real de deployment
+# 
